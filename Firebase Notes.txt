@@ -1,0 +1,5 @@
+1. FireStore Database
+	In FireStore database
+		1. Collection --> is like a table
+		2. Document ---> is like an entries in the table(means each row we say)
+		3. field ---> is like a column in a table
