@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../Firebase-config";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context";
 
-const Login = ({setIsAuth}) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { setIsAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -13,7 +16,7 @@ const Login = ({setIsAuth}) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setIsAuth(true)
+      setIsAuth(true);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -23,7 +26,7 @@ const Login = ({setIsAuth}) => {
   const HandleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, provider);
-      setIsAuth(true)
+      setIsAuth(true);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -31,7 +34,7 @@ const Login = ({setIsAuth}) => {
   };
   return (
     <>
-      <div className="w-1/3 h-[60%] shadow-lg shadow-black rounded-2xl px-10 py-12 border-2 border-black flex flex-col mt-10">
+      <div className="w-1/3 h-[60%] shadow-lg shadow-black rounded-2xl px-10 py-12 border-2 border-white flex flex-col mt-10">
         <form
           className="flex flex-col justify-center items-center"
           onSubmit={(e) => HandleLogin(e)}

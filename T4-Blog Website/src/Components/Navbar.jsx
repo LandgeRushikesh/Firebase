@@ -1,13 +1,17 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase-config";
+import { AuthContext } from "../Context";
 
-const Navbar = ({ isAuth }) => {
-  console.log(isAuth);
-  
+const Navbar = () => {
+  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleSignOut = async () => {
     await signOut(auth);
+    setIsAuth(false);
+    navigate("/login");
   };
   return (
     <nav className="w-screen bg-slate-900 text-white font-semibold px-10 py-6 flex justify-between items-center">

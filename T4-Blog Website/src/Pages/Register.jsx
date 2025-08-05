@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase-config";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context";
 
-export const Register = ({setIsAuth}) => {
+export const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { setIsAuth } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -13,7 +16,7 @@ export const Register = ({setIsAuth}) => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      setIsAuth(true)
+      setIsAuth(true);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -21,8 +24,11 @@ export const Register = ({setIsAuth}) => {
   };
 
   return (
-    <div className="w-1/3 h-1/2 shadow-lg shadow-black rounded-2xl px-10 py-12 border-2 border-black flex flex-col items-center justify-center mt-10">
-      <form onSubmit={(e) => HandleRegister(e)} className="w-full flex flex-col justify-center items-center">
+    <div className="w-1/3 h-1/2 shadow-lg shadow-black rounded-2xl px-10 py-12 border-2 border-white flex flex-col items-center justify-center mt-10">
+      <form
+        onSubmit={(e) => HandleRegister(e)}
+        className="w-full flex flex-col justify-center items-center"
+      >
         <h1 className="font-bold text-3xl mb-3">Sign Up</h1>
         <input
           className="w-full px-4 py-2 mb-3 border-2"
