@@ -7,9 +7,15 @@ import Login from "./Pages/Login";
 import CreatePost from "./Pages/CreatePost";
 import { Register } from "./Pages/Register";
 import { AuthContext } from "./Context";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./Firebase-config";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
+
+  onAuthStateChanged(auth,(currUser)=>{
+    setIsAuth(!!currUser)
+  })
 
   return (
     <>

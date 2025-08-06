@@ -41,7 +41,8 @@ const Navbar = () => {
             </NavLink>
           </li>
         )}
-        <li>
+        {
+          isAuth && <li>
           <NavLink
             to="/createpost"
             className="mr-6 bg-red-700 border-2 border-red-700 px-5 py-2 rounded-lg font-bold"
@@ -49,6 +50,7 @@ const Navbar = () => {
             Create Post
           </NavLink>
         </li>
+        }
       </ul>
     </nav>
   );
